@@ -2,31 +2,43 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Needed for sticky footer */
-  display: flex;
-  flex-direction: column;
+  height: 100%;
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #fff;
   color: #222;
 }
 
+/* ====== DEFAULT LAYOUT ====== */
 .container {
   max-width: 1200px;
   margin: auto;
   padding: 0 1em;
   box-sizing: border-box;
-  flex: 1; /* Take up available space so footer sits at bottom */
+  flex: 1;
 }
 
-/* ====== NAVBAR (always stays on top) ====== */
+/* ====== NAVBAR (not locked by default) ====== */
 .navbar {
   background-color: #4caf50;
   width: 100%;
+  box-sizing: border-box;
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  position: static;
+}
+
+/* ====== NAVBAR LOCKED (only for login/register) ====== */
+.login .navbar,
+.register .navbar {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000; /* stays above everything */
+  width: 100vw;
+  z-index: 1000;
 }
+
+/* ====== NAV CONTAINER ====== */
 .nav-container {
   display: flex;
   align-items: center;
@@ -34,6 +46,9 @@ html, body {
   width: 100%;
   padding: 1em 2em;
   box-sizing: border-box;
+}
+.nav-spread {
+  justify-content: space-between;
 }
 .nav-left {
   display: flex;
@@ -55,24 +70,52 @@ html, body {
   margin-left: 0.5em;
   margin-right: 0.5em;
 }
-.nav-links {
+
+/* ====== USER MENU ====== */
+.user-menu {
   display: flex;
-  gap: 2em;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  align-items: center;
+  gap: 0.6em;
+  position: relative;
 }
-.nav-links a {
-  color: #fff;
+.user-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.3em;
+  border: 2px solid #fff;
+  background: #eee;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 44px;
+  background: #fff;
+  color: #222;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  min-width: 160px;
+  z-index: 999;
+  flex-direction: column;
+}
+.dropdown-content a {
+  padding: 0.7em 1em;
   text-decoration: none;
+  color: #222;
+  display: block;
   font-weight: 500;
-  font-size: 1.09em;
-  padding: 0.15em 0.3em;
-  transition: color 0.15s;
+  border-bottom: 1px solid #eee;
 }
-.nav-links a:hover {
-  text-decoration: underline;
+.dropdown-content a:last-child {
+  border-bottom: none;
 }
+.dropdown-content a:hover {
+  background: #f3f3f3;
+}
+
+/* ====== SIGN IN BUTTON ====== */
 .sign-in-btn {
   background: #c6ff5e;
   color: #1c4924 !important;
@@ -97,7 +140,7 @@ html, body {
 .features {
   display: flex;
   gap: 1.1em;
-  margin: 6em auto 2.5em auto; /* pushed down because navbar is fixed */
+  margin: 6em auto 2.5em auto;
   justify-content: center;
   max-width: 1100px;
 }
@@ -255,39 +298,66 @@ html, body {
   background: #14853a;
 }
 
-/* ====== FOOTER (always bottom, but not fixed) ====== */
+/* ====== FOOTER (not locked by default) ====== */
 .footer {
   background-color: #404040;
   color: #fff;
   padding: 1.2em 1em 0.7em 1em;
-  margin-top: auto; /* pushes footer down */
-}
-.footer-container {
-  display: grid;
-  grid-template-columns: 2fr 1.1fr 1.1fr 2fr;
-  gap: 3em;
-  max-width: 1400px;
-  margin: 0 auto;
-  align-items: flex-start;
-}
-@media (max-width: 1100px) {
-  .footer-container { grid-template-columns: 1fr 1fr; gap: 2em; }
-}
-@media (max-width: 700px) {
-  .footer-container { display: flex; flex-direction: column; gap: 1.3em; }
+  margin-top: auto;
+  box-sizing: border-box;
+  min-height: 120px;
+  position: static;
 }
 
-.footer-column {
+/* ====== FOOTER LOCKED (only for login/register) ====== */
+.login .footer,
+.register .footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+  box-shadow: 0 -2px 14px rgba(0,0,0,0.07);
+}
+
+/* ====== FOOTER GRID ====== */
+.footer-container {
+  display: flex;
+  justify-content: space-between; /* Spread out columns to far left/right */
+  align-items: flex-start;
+  max-width: 1600px; /* Increased max width for more spread */
+  width: 100%;
+  margin: 0 auto;
+  gap: 0; /* Remove gap for even distribution, rely on flex */
+  padding: 0 3vw; /* Add padding for spacing from edges */
+}
+
+.footer-even > .footer-column {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  margin: 0 2vw; /* Add horizontal margin between columns */
 }
+
+@media (max-width: 1100px) {
+  .footer-container { flex-direction: column; gap: 1em; padding: 0 1vw; }
+  .footer-even > .footer-column { margin: 0; }
+}
+
 .footer-logo {
   display: block;
   max-width: 220px;
   width: 100%;
   margin-bottom: 0.6em;
+}
+.social-media {
+  display: flex;
+  gap: 0.7em;
+  justify-content: center;
+  margin-top: 0.6em;
 }
 .social-icon {
   display: flex;
@@ -328,7 +398,6 @@ html, body {
 .footer-column ul li a:hover {
   text-decoration: underline;
 }
-
 .footer form {
   width: 100%;
   max-width: 370px;
@@ -336,6 +405,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 0.8em;
+  align-items: center;
 }
 .footer input[type="email"] {
   padding: 0.7em 1em;
@@ -379,16 +449,107 @@ html, body {
 
 /* ========== RESPONSIVE FIXES ========== */
 @media (max-width: 1100px) {
-  .features { flex-direction: column; gap: 1em; }
-  .hero-overlay, .ar-content { padding: 2em 1em; }
+  .footer-container { flex-direction: column; gap: 1em; }
   .footer form { max-width: 100%; }
   .nav-container { padding: 1em 0.7em; }
 }
 @media (max-width: 700px) {
-  .features { flex-direction: column; gap: 0.7em; }
-  .hero-section, .ar-section { min-height: 220px; }
-  .hero-title, .ar-content h2 { font-size: 1.3em; }
+  .footer-container { flex-direction: column; gap: 1.3em; }
   .footer form { max-width: 100%; }
   .nav-container { flex-direction: column; align-items: stretch; }
   .nav-right { justify-content: flex-end; }
+}
+
+/* ====== EXPLORE SPOTS FULL WIDTH IMAGE STYLES ====== */
+.explore-spots-gallery {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.spot-image-section {
+  position: relative;
+  width: 100vw;
+  height: 45vh; /* Expanded height */
+  min-height: 340px;
+  max-height: 520px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spot-image-section img.spot-image {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.94) brightness(0.85) contrast(1.1); /* Default: greyed out */
+  transition: filter 0.30s;
+}
+
+.spot-image-section.active img.spot-image {
+  filter: none; /* Restore true color on button hover */
+}
+
+.spot-image-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  width: 90vw;
+  max-width: 900px;
+  padding: 2em 1em;
+  text-shadow: 2px 2px 10px #000, 0 2px 6px #222;
+  z-index: 2;
+  font-family: 'Dancing Script', cursive, 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spot-image-title {
+  font-size: 3em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  letter-spacing: 2px;
+}
+
+.spot-image-desc {
+  font-size: 1.25em;
+  font-weight: 400;
+  margin-bottom: 1em;
+}
+
+.explore-btn {
+  background: #18a849;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6em 1.5em;
+  font-size: 1.09em;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.7em;
+  box-shadow: 0 2px 8px rgba(24,168,73,0.09);
+  transition: background 0.18s, color 0.18s;
+  text-decoration: none;
+}
+
+.explore-btn:hover,
+.explore-btn:focus {
+  background: #18a849;
+  color: #fff;
+}
+
+/* Responsive fix for explore spots images */
+@media (max-width: 700px) {
+  .spot-image-title { font-size: 2em; }
+  .spot-image-section { min-height: 180px; height: 180px;}
+  .spot-image-text { padding: 1em 0.3em; }
 }

@@ -15,28 +15,30 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 </head>
-<body class="{% block layout_class %}{% endblock %}">
+<body>
 
-<!-- HEADER / NAVBAR -->
 <header>
-  <nav class="navbar{% block sticky_nav_class %}{% endblock %}">
-    <div class="nav-container nav-spread">
+  <nav class="navbar">
+    <div class="nav-container">
+
       <!-- Logo FAR LEFT -->
       <div class="nav-left">
         <a href="{% url 'public-home' %}">
           <img src="{% static 'images/travel_guide_logo.png' %}" alt="Travel Guide Logo" class="logo" />
         </a>
       </div>
+
       <!-- FAR RIGHT: User Menu -->
       <div class="nav-right">
         {% if user.is_authenticated %}
-          <div class="user-menu dropdown">
+          <div class="user-menu">
             <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}"
                  alt="Profile Picture" class="user-pic">
             <span class="logo-text">Welcome, {{ user.username }}</span>
+
             <!-- Dropdown -->
             <div class="dropdown-content">
-              <a href="{% url 'tourism:explore_spots' %}">Explore</a>
+              <a href="#">Explore</a>
               <a href="#">Experiences</a>
               <a href="#">Reviews</a>
               <a href="{% url 'view_profile' %}">Profile</a>
@@ -48,12 +50,24 @@
           <a href="{% url 'login' %}" class="sign-in-btn">Sign In</a>
         {% endif %}
       </div>
+
     </div>
   </nav>
 </header>
 
-<!-- MAIN CONTENT -->
-<main class="container page-content{% block sticky_content_class %}{% endblock %}">
+
+<!-- Dropdown Hover Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const dropdown = document.querySelector(".dropdown");
+    const menu = document.querySelector(".dropdown-content");
+    dropdown.addEventListener("mouseenter", () => menu.style.display = "block");
+    dropdown.addEventListener("mouseleave", () => menu.style.display = "none");
+  });
+</script>
+
+
+<main class="container">
   {% if user.is_authenticated %}
     <div class="alert alert-success text-center mt-3" role="alert">
       <i class="bi bi-person-check"></i> Welcome back, {{ user.username }}!
@@ -63,10 +77,9 @@
   {% endblock %}
 </main>
 
-<!-- FOOTER -->
-<footer class="footer{% block sticky_footer_class %}{% endblock %}">
-  <div class="container footer-container footer-even">
-    <div class="footer-column footer-brand">
+<footer class="footer">
+  <div class="container footer-container">
+    <div class="footer-column" style="flex:2 1 350px; min-width: 340px;">
       <img src="{% static 'images/travel_guide_logo.png' %}" alt="Travel Guide Logo" class="footer-logo" />
       <div class="social-media">
         <a href="https://facebook.com" class="social-icon" target="_blank" rel="noopener">
@@ -83,7 +96,6 @@
         </a>
       </div>
     </div>
-
     <div class="footer-column">
       <h4>About</h4>
       <ul>
@@ -93,7 +105,6 @@
         <li><a href="#">Blog</a></li>
       </ul>
     </div>
-
     <div class="footer-column">
       <h4>Quick Links</h4>
       <ul>
@@ -103,7 +114,6 @@
         <li><a href="#">Reviews</a></li>
       </ul>
     </div>
-
     <div class="footer-column">
       <h4>Newsletter</h4>
       <form>
@@ -112,7 +122,6 @@
       </form>
     </div>
   </div>
-
   <div class="footer-bottom">
     <span>Terms and Conditions</span>
     <span class="divider"></span>
@@ -121,18 +130,6 @@
     <span>&copy; 2025 TravelGuide</span>
   </div>
 </footer>
-
-<script>
-  // Dropdown hover effect
-  document.addEventListener("DOMContentLoaded", function() {
-    const dropdown = document.querySelector(".user-menu");
-    const menu = document.querySelector(".dropdown-content");
-    if (dropdown && menu) {
-      dropdown.addEventListener("mouseenter", () => menu.style.display = "block");
-      dropdown.addEventListener("mouseleave", () => menu.style.display = "none");
-    }
-  });
-</script>
 
 </body>
 </html>

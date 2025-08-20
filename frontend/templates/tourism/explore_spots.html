@@ -1,35 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- ALBAY SECTION -->
-<div class="province-section" style="background: url('/static/images/Albay.png') no-repeat center center; background-size: cover;">
-  <div class="hero-overlay">
-    <h1 class="hero-title">Discover Albay</h1>
-    <p class="hero-subtitle">
-      Home to the majestic Mayon Volcano, Albay offers breathtaking views and rich cultural heritage.
-    </p>
-    <button class="province-btn" onclick="window.location.href='/albay-spots'">Explore More</button>
+    {% load static %}
+<div class="explore-spots-gallery">
+  <div class="spot-image-section" data-spot="albay">
+    <img src="{% static 'images/Albay.png' %}" alt="Albay" class="spot-image">
+    <div class="spot-image-text">
+      <div class="spot-image-title">Discover Albay</div>
+      <div class="spot-image-desc">
+        Home to the majestic Mayon Volcano, Albay offers breathtaking views and rich cultural heritage.
+      </div>
+      <button class="explore-btn" data-spot="albay">Explore More</button>
+    </div>
+  </div>
+  <div class="spot-image-section" data-spot="camsur">
+    <img src="{% static 'images/CamarinesSur.png' %}" alt="Camarines Sur" class="spot-image">
+    <div class="spot-image-text">
+      <div class="spot-image-title">Explore Camarines Sur</div>
+      <div class="spot-image-desc">
+        From wakeboarding adventure to serene lakes, CamSur is a paradise for thrill-seekers and nature lovers.
+      </div>
+      <button class="explore-btn" data-spot="camsur">Explore More</button>
+    </div>
+  </div>
+  <div class="spot-image-section" data-spot="sorsogon">
+    <img src="{% static 'images/Sorsogon.png' %}" alt="Sorsogon" class="spot-image">
+    <div class="spot-image-text">
+      <div class="spot-image-title">Visit Sorsogon</div>
+      <div class="spot-image-desc">
+        Known for whale shark interactions and pristine beaches, Sorsogon is perfect for a tropical getaway.
+      </div>
+      <button class="explore-btn" data-spot="sorsogon">Explore More</button>
+    </div>
   </div>
 </div>
-
-<!-- CAMARINES SUR SECTION -->
-<div class="province-section" style="background: url('/static/images/CamarinesSur.png') no-repeat center center; background-size: cover;">
-  <div class="hero-overlay">
-    <h1 class="hero-title">Explore Camarines Sur</h1>
-    <p class="hero-subtitle">
-      From wakeboarding adventures to serene lakes, CamSur is a paradise for thrill-seekers and nature lovers.
-    </p>
-    <button class="province-btn" onclick="window.location.href='/camarines-sur-spots'">Explore More</button>
-  </div>
-</div>
-
-<!-- SORSOGON SECTION -->
-<div class="province-section" style="background: url('/static/images/Sorsogon.png') no-repeat center center; background-size: cover;">
-  <div class="hero-overlay">
-    <h1 class="hero-title">Visit Sorsogon</h1>
-    <p class="hero-subtitle">
-      Known for whale shark interactions and pristine beaches, Sorsogon is perfect for a tropical getaway.
-    </p>
-    <button class="province-btn" onclick="window.location.href='/sorsogon-spots'">Explore More</button>
-  </div>
-</div>
+<script src="{% static 'js/explore_spots.js' %}"></script>
 {% endblock %}
