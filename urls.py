@@ -36,4 +36,6 @@ urlpatterns = [
     path('profile/', profile_views.view_profile, name='view_profile'),
     path('profile/edit/', edit_profile, name='edit_profile'),
 
+    #search bar
+    path('tourism/', include(('apps.tourism.urls', 'tourism'), namespace='tourism')),
 ]

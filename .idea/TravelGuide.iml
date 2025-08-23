@@ -4,8 +4,8 @@
     <facet type="django" name="Django">
       <configuration>
         <option name="rootFolder" value="$MODULE_DIR$" />
-        <option name="settingsModule" value="bicoltravelguide/settings.py" />
-        <option name="manageScript" value="$MODULE_DIR$/manage.py" />
+        <option name="settingsModule" value="backend/bicoltravelguide/settings.py" />
+        <option name="manageScript" value="" />
         <option name="environment" value="&lt;map/&gt;" />
         <option name="doNotUseTestRunner" value="false" />
         <option name="trackFilePattern" value="migrations" />
@@ -22,7 +22,7 @@
       <excludeFolder url="file://$MODULE_DIR$/mobile/.expo" />
       <excludeFolder url="file://$MODULE_DIR$/staticfiles" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.13 (TravelGuide-main)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.13" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="bootstrap-icons" level="application" />

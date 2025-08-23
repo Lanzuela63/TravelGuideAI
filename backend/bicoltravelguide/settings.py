@@ -95,9 +95,9 @@ TEMPLATES = [
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "travelguide_db",
+        "NAME": "postgres",
         "USER": "postgres",
-        "PASSWORD": "N3t0p1@boy",
+        "PASSWORD": "arimado",
         "HOST": "localhost",
         "PORT": "5432",
     }

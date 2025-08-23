@@ -1,6 +1,7 @@
 #apps/tourism/views/main_views.py
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from apps.tourism.models import Spot
 from rest_framework import generics, filters
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -133,3 +134,14 @@ def spot_detail_view(request, pk):
 @login_required
 def reported_spots(request):
     return render(request, "tourism/reported_spots.html")
+
+def reported_spots(request):
+    query = request.GET.get('query', '')  # Get the search query from the URL
+    if query:
+        # Filter spots by name (case-insensitive search)
+        spots = Spot.objects.filter(name__icontains=query)  # This filters by name field
+    else:
+        # If no query, return all spots
+        spots = Spot.objects.all()
+
+    return render(request, 'tourism/reported_spots.html', {'spots': spots, 'query': query})

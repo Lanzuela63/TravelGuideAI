@@ -86,3 +86,19 @@ class VisitedSpot(models.Model):
 
     class Meta:
         unique_together = ('user', 'spot')
+
+class Spot(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    class Spot(models.Model):
+        name = models.CharField(max_length=100)
+        description = models.TextField()
+        location = models.CharField(max_length=100)
+
+        class Meta:
+            db_table = 'tourism_spot'

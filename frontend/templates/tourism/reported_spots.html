@@ -2,4 +2,25 @@
 {% block content %}
 <h2>Reported Spots</h2>
 <p>List of flagged or reported tourist spots.</p>
+     <!-- Search Form -->
+    <form method="GET" action="{% url 'tourism:reported_spots' %}">
+        <div class="search-bar">
+            <input type="text" name="query" placeholder="Search for spots..." class="search-input" value="{{ query }}">
+            <button type="submit" class="search-btn">Search</button>
+        </div>
+    </form>
+
+    <!-- Display the search results -->
+    <div class="spot-list">
+        {% if spots %}
+            <h3>Search Results for "{{ query }}":</h3>
+            <ul>
+                {% for spot in spots %}
+                    <li>{{ spot.name }} - {{ spot.location }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No spots found matching "{{ query }}".</p>
+        {% endif %}
+    </div>
 {% endblock %}
